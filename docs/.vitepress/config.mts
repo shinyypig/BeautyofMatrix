@@ -7,19 +7,27 @@ export default defineConfig({
     themeConfig: {
         // https://vitepress.dev/reference/default-theme-config
         nav: [
-            { text: "主页", link: "/" },
-            { text: "文章", link: "/markdown-examples" },
+            { text: "矩阵之美", link: "/books/basics.md" },
+            { text: "矩阵应用", link: "/articles" },
         ],
 
-        sidebar: [
-            {
-                text: "文章",
-                items: [
-                    { text: "Markdown Examples", link: "/markdown-examples" },
-                    { text: "Runtime API Examples", link: "/api-examples" },
-                ],
-            },
-        ],
+        sidebar: {
+            "/books/": [
+                {
+                    text: "矩阵之美",
+                    items: [
+                        {
+                            text: "基础篇",
+                            link: "/books/basics.md",
+                        },
+                        {
+                            text: "算法篇",
+                            link: "/books/algorithms.md",
+                        },
+                    ],
+                },
+            ],
+        },
 
         socialLinks: [
             {
@@ -30,5 +38,9 @@ export default defineConfig({
     },
     markdown: {
         math: true,
+        image: {
+            // image lazy loading is disabled by default
+            lazyLoading: true,
+        },
     },
 });
