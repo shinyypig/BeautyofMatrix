@@ -179,3 +179,99 @@ git push
 ``` 
 
 仓库页面 → Actions 可查看部署进度，完成后访问 https:/用户名.github.io/BeautyofMatrix/。
+
+### 3.如何通过复刻（Fork）参与 GitHub 项目
+#### 什么是复刻（Fork）？
+复刻（Fork）是 GitHub 提供的一种功能，允许你创建一个项目的个人副本。通过复刻，你可以自由修改代码而不影响原项目，之后还能通过 Pull Request 将你的修改提交给原项目维护者，成为项目贡献者。
+
+#### 如何参与？
+复刻目标项目
+打开你想要参与的 GitHub 项目主页（https://github.com/shinyypig/BeautyofMatrix） 
+点击页面右上角的Fork按钮 
+
+![这是图片20](pics/assets/download20.png "download20")
+
+等待几秒钟，GitHub 会为你创建该项目的复刻版本，地址通常为https://github.com/你的用户名/repository 
+
+![这是图片21](pics/assets/download21.png "download21") 
+
+将复刻仓库克隆到本地： 
+
+使用git clone命令将你的复刻仓库下载到本地计算机： 
+```
+git clone https://github.com/你的用户名/repository.git
+cd  repository  //repository改为你创建的复刻项目名
+``` 
+
+为了保持你的复刻仓库与原项目同步，需要添加原仓库作为上游（upstream）： 
+```
+# 添加上游仓库
+git remote add upstream https://github.com/username/original-repository.git
+
+# 验证配置是否成功
+git remote -v
+``` 
+成功后会显示类似以下内容： 
+```
+origin  https://github.com/你的用户名/repository.git (fetch)
+origin  https://github.com/你的用户名/repository.git (push)
+upstream        https://github.com/username/original-repository.git (fetch)
+upstream        https://github.com/username/original-repository.git (push)
+```
+为了避免直接在主分支（通常是main或master）上修改，建议创建一个新分支：
+```
+# 确保你的主分支是最新的
+git checkout main
+git pull upstream main
+
+# 创建并切换到新分支
+git checkout -b feature/your-feature-name
+``` 
+分支命名建议： 
+
+• 新功能：feature/功能名称 
+
+• 修复 bug：bugfix/问题描述 
+
+• 文档更新：docs/文档名称 
+
+#### 如何从分支修改到对矩阵之美项目修改
+首先将修改推送到复刻仓库： 
+```
+# 添加修改的文件
+git add 文件名1 文件名2 ...
+# 或添加所有修改
+git add .
+
+# 提交修改，填写有意义的提交信息
+git commit -m "简要描述你的修改：例如 修复了登录页面的样式问题" 
+
+#推送到你的复刻仓库
+git push origin feature/your-feature-name
+``` 
+然后向项目管理员创建PR，打开你的复刻仓库页面（https://github.com/你的用户名/repository）
+回到线上派生项目的工作区，会看到新分支和修改的合并提交信息，和一个 "Compare & pull request" 的按钮： 
+
+![这是图片22](pics/assets/download22.png "download22") 
+在打开的页面中：
+填写标题（简洁描述你的修改） 
+
+填写详细描述（说明你修改了什么，为什么这样修改） 
+
+确保基础分支是原项目的主分支，比较分支是你创建的新分支 
+
+点击 "Create pull request" 按钮即可。 
+***
+### 保持复刻仓库同步
+建议定期同步原项目的更新，避免你的修改与原项目产生冲突： 
+
+```
+# 切换到主分支
+git checkout main
+
+# 拉取原项目的最新代码
+git pull upstream main
+
+# 推送到你的复刻仓库
+git push origin main
+```
